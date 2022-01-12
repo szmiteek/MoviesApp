@@ -1,0 +1,132 @@
+@use "./variables" as *;
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.App {
+  background-color: $primary-color;
+  min-height: 100vh;
+}
+.search {
+  border: none;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+.movie {
+  color: $white;
+  background-color: $secondary-color;
+  margin: 20px 20px;
+  width: 250px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+
+  .heart-container {
+    height: 40px;
+    width: 40px;
+    background-color: $white;
+    border-radius: 10px;
+    position: absolute;
+    top: 1%;
+    right: 2%;
+    .heart {
+      width: 2rem;
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+    .vote {
+      background-color: $primary-color;
+      padding: 5px;
+      margin-right: 5px;
+      border-radius: 5px;
+      align-self: start;
+    }
+  }
+  .poster {
+    height: 300px;
+    width: 100%;
+  }
+  .overview {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 80%;
+    background-color: $secondary-color;
+    transform: translateY(101%);
+    text-align: center;
+    transition: 0.5s;
+  }
+}
+.info:hover .overview {
+  transform: translateY(0%);
+}
+.search-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-top: 20px;
+  &-button {
+    border: none;
+    cursor: pointer;
+    background-color: $secondary-color;
+    color: $white;
+    padding: 10px;
+    margin-right: 5px;
+  }
+  &-input {
+    align-self: center;
+    color: $secondary-color;
+    padding: 10px;
+    font-size: 1rem;
+    border: 3px solid $secondary-color;
+    border-radius: 25px;
+    background-color: $third-color;
+  }
+  &-input:focus {
+    outline: 0;
+    color: $white;
+    background-color: $secondary-color;
+  }
+
+  .genres {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+    .genre {
+      cursor: pointer;
+      margin: 10px;
+      padding: 10px;
+      border-radius: 15px;
+      background-color: $third-color;
+    }
+  }
+}
