@@ -110,6 +110,13 @@ const SearchPanel = ({ setMoviesToShow, setHeader }) => {
     }
     setHeader("Znalezione");
   };
+
+  const getLikedMovies = () => {
+    const movies = JSON.parse(localStorage.getItem("movies"));
+    console.log(movies);
+    setMoviesToShow(movies);
+    setHeader("Polubione filmy");
+  };
   const genreHandler = (e) => {
     fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=pl-PL&with_genres=${e.target.id}`
@@ -160,6 +167,9 @@ const SearchPanel = ({ setMoviesToShow, setHeader }) => {
             onClick={() => getData(UPCOMING, "Nadchodzące premiery")}
           >
             Nadchodzące
+          </button>
+          <button className="search-panel-button" onClick={getLikedMovies}>
+            Polubione filmy
           </button>
         </div>
 

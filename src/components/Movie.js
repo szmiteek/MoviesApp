@@ -1,25 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Heart from "react-heart";
 
 const Movie = ({ movie }) => {
   const [isActive, setIsActive] = useState(false);
 
+  useEffect(() => {
+    LikeChecking(movie);
+  });
   const saveToLocalStorage = (m) => {
     const movie = {
       id: m.id,
-      poster: m.poster_path,
+      poster_path: m.poster_path,
       title: m.title,
-      vote: m.vote_average,
+      vote_average: m.vote_average,
       overview: m.overview,
     };
 
     if (localStorage.hasOwnProperty("movies")) {
-      let movies = JSON.parse(localStorage.getItem("movies"));
+      const movies = JSON.parse(localStorage.getItem("movies"));
       const movieToDelete = movies.filter((movie) => movie.id === m.id);
-      console.log(movieToDelete);
+
       if (!movieToDelete.length) {
         movies.push(movie);
-        console.log("CHUJ");
       } else {
         const index = movies.findIndex((movie) => movie.id === m.id);
         movies.splice(index, 1);
@@ -31,6 +33,16 @@ const Movie = ({ movie }) => {
       localStorage.setItem("movies", JSON.stringify(movies));
     }
   };
+  const LikeChecking = (m) => {
+    const movies = JSON.parse(localStorage.getItem("movies"));
+    if (movies) {
+      const isLike = movies.some((movie) => movie.id === m.id);
+      if (isLike) {
+        setIsActive(true);
+      }
+    }
+  };
+
   const heartButtonHandler = (m) => {
     setIsActive(!isActive);
     saveToLocalStorage(m);

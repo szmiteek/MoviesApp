@@ -12,14 +12,16 @@
   background-color: $primary-color;
   min-height: 100vh;
 }
+.header {
+  color: $third-color;
+  font-size: 30px;
+  padding-top: 20px;
+  padding-left: 20px;
+}
 .search {
   border: none;
 }
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+
 .movies {
   display: flex;
   flex-wrap: wrap;
@@ -53,12 +55,14 @@
   }
 
   .info {
+    color: $text-color;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
 
     .vote {
+      color: $white;
       background-color: $primary-color;
       padding: 5px;
       margin-right: 5px;
@@ -95,6 +99,7 @@
   padding-top: 20px;
   &-button {
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     background-color: $secondary-color;
     color: $white;
@@ -103,17 +108,18 @@
   }
   &-input {
     align-self: center;
-    color: $secondary-color;
+    color: $text-color;
     padding: 10px;
     font-size: 1rem;
-    border: 3px solid $secondary-color;
-    border-radius: 25px;
+    border: 3px solid $primary-color;
+    border-radius: 5px;
     background-color: $third-color;
   }
   &-input:focus {
+    border: 3px solid $secondary-color;
     outline: 0;
-    color: $white;
-    background-color: $secondary-color;
+    color: $text-color;
+    // background-color: $secondary-color;
   }
 
   .genres {
@@ -122,6 +128,7 @@
     justify-content: center;
     width: 80%;
     .genre {
+      color: $text-color;
       cursor: pointer;
       margin: 10px;
       padding: 10px;

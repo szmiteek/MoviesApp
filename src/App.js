@@ -13,13 +13,11 @@ const App = () => {
           setMoviesToShow={setMoviesToShow}
           setHeader={setHeader}
         ></SearchPanel>
-        <div className="container">
-          <MoviesPanel
-            moviesToShow={moviesToShow}
-            setMoviesToShow={setMoviesToShow}
-            header={header}
-          />
-        </div>
+        <MoviesPanel
+          moviesToShow={moviesToShow}
+          setMoviesToShow={setMoviesToShow}
+          header={header}
+        />
       </div>
     </>
   );

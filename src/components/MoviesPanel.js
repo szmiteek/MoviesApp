@@ -20,7 +20,7 @@ const MoviesPanel = ({ moviesToShow, setMoviesToShow, header }) => {
   });
   return (
     <>
-      <h2>{header}</h2>
+      <h2 className="header">{header}</h2>
       <div className="movies">{movies}</div>
     </>
   );
