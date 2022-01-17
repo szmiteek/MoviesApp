@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import Modal from "./Modal";
 import Heart from "react-heart";
 
-const Movie = ({ movie }) => {
+const Movie = ({ movie, setMoviesToShow }) => {
   const [isActive, setIsActive] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     LikeChecking(movie);
@@ -25,6 +27,7 @@ const Movie = ({ movie }) => {
       } else {
         const index = movies.findIndex((movie) => movie.id === m.id);
         movies.splice(index, 1);
+        setMoviesToShow(movies);
       }
 
       localStorage.setItem("movies", JSON.stringify(movies));
@@ -33,6 +36,7 @@ const Movie = ({ movie }) => {
       localStorage.setItem("movies", JSON.stringify(movies));
     }
   };
+
   const LikeChecking = (m) => {
     const movies = JSON.parse(localStorage.getItem("movies"));
     if (movies) {
@@ -48,36 +52,48 @@ const Movie = ({ movie }) => {
     saveToLocalStorage(m);
   };
 
+  const toggleModal = (v) => {
+    setModalVisible(v);
+  };
+
   return (
-    <div key={movie.id} className="movie">
-      <img
-        className="poster"
-        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-        alt="brak plakatu"
-      />
-      <div className="heart-container">
-        <div className="heart">
-          <Heart
-            style={{ fill: isActive ? "red" : "grey" }}
-            inactiveColor="grey"
-            isActive={isActive}
-            onClick={() => heartButtonHandler(movie)}
-            animationTrigger="hover"
-            animationScale={1.2}
-          />
+    <>
+      <Modal visible={modalVisible} toggleModal={toggleModal}></Modal>
+      <div key={movie.id} className="movie">
+        <img
+          className="poster"
+          src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+          alt="brak plakatu"
+        />
+        <div className="heart-container">
+          <div className="heart">
+            <Heart
+              style={{ fill: isActive ? "red" : "grey" }}
+              inactiveColor="grey"
+              isActive={isActive}
+              onClick={() => heartButtonHandler(movie)}
+              animationTrigger="hover"
+              animationScale={1.2}
+            />
+          </div>
+        </div>
+
+        <div className="info">
+          <h3>{movie.title}</h3>
+          <div className="vote">{movie.vote_average}</div>
+
+          <div className="overview">
+            <button
+              className="overview-button"
+              onClick={() => toggleModal(true)}
+            >
+              Zobacz więcej
+            </button>
+            {movie.overview}
+          </div>
         </div>
       </div>
-
-      <div className="info">
-        <h3>{movie.title}</h3>
-        <div className="vote">{movie.vote_average}</div>
-
-        <div className="overview">
-          <button>Zobacz więcej</button>
-          {movie.overview}
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

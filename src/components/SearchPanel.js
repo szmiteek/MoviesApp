@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTransition, animated } from "react-spring";
-import { API_KEY } from "./MoviesPanel";
+import { API_KEY, MOST_POPULAR, UPCOMING, TOP_RATED } from "../App";
 
 const genres = {
   genres: [
@@ -76,9 +76,6 @@ const genres = {
     },
   ],
 };
-const UPCOMING = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=pl-PL&page=1`;
-const TOP_RATED = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=pl-PL&page=1`;
-const MOST_POPULAR = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pl-PL&page=1`;
 
 const SearchPanel = ({ setMoviesToShow, setHeader }) => {
   const [genresVisible, setGenresVisible] = useState(false);
@@ -113,9 +110,13 @@ const SearchPanel = ({ setMoviesToShow, setHeader }) => {
 
   const getLikedMovies = () => {
     const movies = JSON.parse(localStorage.getItem("movies"));
-    console.log(movies);
-    setMoviesToShow(movies);
-    setHeader("Polubione filmy");
+    if (movies.length) {
+      setMoviesToShow(movies);
+      setHeader("Polubione filmy");
+    } else {
+      setHeader("Brak polubionych");
+      setMoviesToShow([]);
+    }
   };
   const genreHandler = (e) => {
     fetch(
@@ -152,7 +153,7 @@ const SearchPanel = ({ setMoviesToShow, setHeader }) => {
           </button>
           <button
             className="search-panel-button"
-            onClick={() => getData(MOST_POPULAR, "Najpopularniejsze filmy")}
+            onClick={() => getData(MOST_POPULAR, "Popularne filmy")}
           >
             Najpopularniejsze filmy
           </button>
