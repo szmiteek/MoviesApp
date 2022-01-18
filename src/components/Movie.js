@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import Modal from "./Modal";
 import Heart from "react-heart";
 
-const Movie = ({ movie, setMoviesToShow }) => {
+const Movie = ({ movie }) => {
   const [isActive, setIsActive] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     LikeChecking(movie);
   });
+
   const saveToLocalStorage = (m) => {
     const movie = {
       id: m.id,
@@ -27,7 +28,6 @@ const Movie = ({ movie, setMoviesToShow }) => {
       } else {
         const index = movies.findIndex((movie) => movie.id === m.id);
         movies.splice(index, 1);
-        setMoviesToShow(movies);
       }
 
       localStorage.setItem("movies", JSON.stringify(movies));

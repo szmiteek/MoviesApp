@@ -28,6 +28,7 @@
   justify-content: center;
   margin-top: 20px;
 }
+
 .movie {
   color: $white;
   background-color: $secondary-color;
@@ -119,7 +120,6 @@
     border: 3px solid $secondary-color;
     outline: 0;
     color: $text-color;
-    // background-color: $secondary-color;
   }
 
   .genres {
@@ -159,5 +159,4 @@
   padding: 50px;
   z-index: 1000;
   text-align: center;
-  /* border-radius: 5%; */
 }

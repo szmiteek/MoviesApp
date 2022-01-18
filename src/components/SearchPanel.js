@@ -79,12 +79,16 @@ const genres = {
 
 const SearchPanel = ({ setMoviesToShow, setHeader }) => {
   const [genresVisible, setGenresVisible] = useState(false);
+
   const [title, setTitle] = useState("");
 
   const transition = useTransition(genresVisible, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
+    config: {
+      duration: 500,
+    },
   });
 
   const getData = (api, header) => {

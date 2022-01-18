@@ -10,7 +10,6 @@ export const MOST_POPULAR = `https://api.themoviedb.org/3/movie/popular?api_key=
 
 const App = () => {
   const [moviesToShow, setMoviesToShow] = useState([]);
-
   const [header, setHeader] = useState("Popularne filmy");
 
   useEffect(() => {
@@ -25,11 +24,7 @@ const App = () => {
           setMoviesToShow={setMoviesToShow}
           setHeader={setHeader}
         ></SearchPanel>
-        <MoviesPanel
-          moviesToShow={moviesToShow}
-          setMoviesToShow={setMoviesToShow}
-          header={header}
-        />
+        <MoviesPanel moviesToShow={moviesToShow} header={header} />
       </div>
     </>
   );
