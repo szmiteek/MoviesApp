@@ -1,14 +1,32 @@
 import { useState, useEffect } from "react";
 import Modal from "./Modal";
 import Heart from "react-heart";
+import { API_KEY } from "../App";
 
 const Movie = ({ movie }) => {
   const [isActive, setIsActive] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [moreInfo, setMoreInfo] = useState([]);
+  const [trailers, setTrailers] = useState([]);
 
   useEffect(() => {
     LikeChecking(movie);
   });
+
+  const getMoreInfo = () => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${API_KEY}&language=pl-PL`
+    )
+      .then((response) => response.json())
+      .then((data) => setMoreInfo(data.cast));
+  };
+  const getTrailers = () => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${API_KEY}&language=en-US`
+    )
+      .then((response) => response.json())
+      .then((data) => setTrailers(data.results));
+  };
 
   const saveToLocalStorage = (m) => {
     const movie = {
@@ -58,7 +76,13 @@ const Movie = ({ movie }) => {
 
   return (
     <>
-      <Modal visible={modalVisible} toggleModal={toggleModal}></Modal>
+      <Modal
+        trailers={trailers}
+        moreInfo={moreInfo}
+        setMoreInfo={setMoreInfo}
+        visible={modalVisible}
+        toggleModal={toggleModal}
+      ></Modal>
       <div key={movie.id} className="movie">
         <img
           className="poster"
@@ -85,7 +109,11 @@ const Movie = ({ movie }) => {
           <div className="overview">
             <button
               className="overview-button"
-              onClick={() => toggleModal(true)}
+              onClick={() => {
+                toggleModal(true);
+                getMoreInfo();
+                getTrailers();
+              }}
             >
               Zobacz więcej
             </button>
