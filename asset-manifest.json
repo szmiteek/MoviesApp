@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/MoviesApp/static/css/main.14404b4d.css",
+    "main.css": "/MoviesApp/static/css/main.2f918f64.css",
     "main.js": "/MoviesApp/static/js/main.9c9c35af.js",
     "index.html": "/MoviesApp/index.html",
-    "main.14404b4d.css.map": "/MoviesApp/static/css/main.14404b4d.css.map",
+    "main.2f918f64.css.map": "/MoviesApp/static/css/main.2f918f64.css.map",
     "main.9c9c35af.js.map": "/MoviesApp/static/js/main.9c9c35af.js.map"
   },
   "entrypoints": [
-    "static/css/main.14404b4d.css",
+    "static/css/main.2f918f64.css",
     "static/js/main.9c9c35af.js"
   ]
 }
