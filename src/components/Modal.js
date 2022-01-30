@@ -37,6 +37,7 @@ const Modal = ({ visible, toggleModal, moreInfo, setMoreInfo, trailers }) => {
   const videos = videosPath.map((video) => (
     <SwiperSlide key={video.path}>
       <iframe
+        className="video"
         title={video.path}
         width="420"
         height="315"
